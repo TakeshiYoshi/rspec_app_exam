@@ -4,7 +4,7 @@ RSpec.describe 'Task', type: :system do
   describe 'Task一覧' do
     let!(:project) { create(:project) }
     let!(:task) { create(:task, project: project) }
-    
+
     context '正常系' do
       it '一覧ページにアクセスした場合、Taskが表示されること' do
         # TODO: ローカル変数ではなく let を使用してください
@@ -44,11 +44,12 @@ RSpec.describe 'Task', type: :system do
   end
 
   describe 'Task詳細' do
+    let(:project) { create(:project) }
+    let(:task) { create(:task, project: project) }
+    
     context '正常系' do
       it 'Taskが表示されること' do
         # TODO: ローカル変数ではなく let を使用してください
-        project = FactoryBot.create(:project)
-        task = FactoryBot.create(:task, project_id: project.id)
         visit project_task_path(project, task)
         expect(page).to have_content(task.title)
         expect(page).to have_content(task.status)
